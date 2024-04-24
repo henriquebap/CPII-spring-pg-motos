@@ -26,18 +26,14 @@ import jakarta.persistence.Table;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
-
-
 @Entity
-///Pensar melhor sobre depois
 @Table(name = "TB_VEICULO")
 public class Veiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_VEICULO")
     @SequenceGenerator(name = "SQ_VEICULO", sequenceName = "SQ_VEICULO", allocationSize = 1)
-    @Column(name = "veiculo_id")
+    @Column(name = "VEICULO_ID")
     private Long id;
 
     @Column(name = "NM_VEICULO")
@@ -58,27 +54,20 @@ public class Veiculo {
     @Column(name = "MODELO_VEICULO")
     private String modelo;
 
-    @Column(name = "PALAVRA_EFEITO_VEICULO", length = 15 )
+    @Column(name = "PALAVRA_EFEITO_VEICULO", length = 15)
     private String palavraDeEfeito;
 
-    @JoinColumn(
-        name = "FABRICANTE",
-        referencedColumnName = "ID_FABRICANTE",
-        foreignKey = @ForeignKey(name="FK_VEICULO_FABRICANTE"),
-        nullable = false
-    )
+    @ManyToOne
+    @JoinColumn(name = "FABRICANTE_ID", referencedColumnName = "ID_FABRICANTE", foreignKey = @ForeignKey(name = "FK_VEICULO_FABRICANTE"), nullable = false)
     private Fabricante fabricante;
 
-    //finalizar com o resto da tabela   
     @ManyToOne
+    @JoinColumn(name = "TIPO_VEICULO_ID", foreignKey = @ForeignKey(name = "FK_VEICULO_TIPO_VEICULO"))
     private TipoVeiculo tipo;
 
     @ManyToMany
-    @JoinTable(
-        name = "TB_VEICULO_ACESSORIO",
-        joinColumns = @JoinColumn(name = "veiculo_id"),
-        inverseJoinColumns = @JoinColumn(name = "acessorio_id")
-    )
+    @JoinTable(name = "TB_VEICULO_ACESSORIO", joinColumns = @JoinColumn(name = "VEICULO_ID"), inverseJoinColumns = @JoinColumn(name = "ACESSORIO_ID"))
+    @Builder.Default
     private Set<Acessorio> acessorios = new LinkedHashSet<>();
 
 }

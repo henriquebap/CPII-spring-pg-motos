@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "TB_LOJA")
 public class Loja {
@@ -29,12 +27,8 @@ public class Loja {
     private String nome;
 
     @ManyToMany
-    @JoinColumn(
-        name = "VEICULO",
-        referencedColumnName = "ID_VEICULO",
-        foreignKey = @ForeignKey(name = "FK_LOJA_VEICULO"),
-        nullable = false
-    )
+    @JoinTable(name = "TB_LOJA_VEICULO", joinColumns = @JoinColumn(name = "ID_LOJA"), inverseJoinColumns = @JoinColumn(name = "VEICULO_ID"))
+    @Builder.Default
     private Set<Veiculo> veiculosComercializados = new LinkedHashSet<>();
 
 }

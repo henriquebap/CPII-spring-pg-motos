@@ -1,6 +1,5 @@
 package br.com.fiap.motos.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,26 +12,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
-@Table(name = "TB_TIPOVEICULO",
-        uniqueConstraints = {
-            @UniqueConstraint(
-                name = "UK_VEICULO_TIPO", columnNames = {"NM_TIPOVEICULO", "NM_VEICULO"}
-            )
-        })
+@Table(name = "TB_TIPO_VEICULO", uniqueConstraints = {
+        @UniqueConstraint(name = "UK_TIPO_VEICULO_NOME", columnNames = { "NM_TIPO_VEICULO" })
+})
 public class TipoVeiculo {
 
     @Id
-    //veri
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_TIPO_VEICULO")
     private Long id;
 
-    @Column(name = "NM_TIPOVEICULO")
+    @Column(name = "NM_TIPO_VEICULO", length = 50, nullable = false)
     private String nome;
+
 }

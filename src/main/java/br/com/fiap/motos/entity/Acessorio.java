@@ -17,12 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "TB_ACESSORIO"
-        )
+@Table(name = "TB_ACESSORIO")
 public class Acessorio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ACESSORIO_ID")
     private Long id;
 
     @Column(name = "NM_ACESSORIO")
