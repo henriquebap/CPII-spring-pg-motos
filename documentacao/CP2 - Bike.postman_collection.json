@@ -1,0 +1,484 @@
+{
+	"info": {
+		"_postman_id": "24d49b20-ec79-4b51-9dfc-a156cb260f69",
+		"name": "CP2 - Bike",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30895155"
+	},
+	"item": [
+		{
+			"name": "Veiculo - VALID",
+			"item": [
+				{
+					"name": "veiculo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"RR\",\r\n    \"anoDeFabricacao\": 2022,\r\n    \"cor\": \"Preta\",\r\n    \"preco\": 75000,\r\n    \"cilindradas\": 900,\r\n    \"modelo\": \"RR Speed\",\r\n    \"palavraDeEfeito\": \"Aventureira\",\r\n    \"fabricante\": {\r\n        \"id\": 1\r\n    },\r\n    \"tipo\": {\r\n        \"id\": 1\r\n    },\r\n    \"acessorios\": [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/veiculos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"veiculos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - ACESSORIOS - IN VEICULO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/veiculos/1/acessorios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"veiculos",
+								"1",
+								"acessorios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/veiculos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"veiculos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - ACESSORIOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/veiculos/1/acessorios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"veiculos",
+								"1",
+								"acessorios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/veiculos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"veiculos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LOJA - VALID",
+			"item": [
+				{
+					"name": "POST VEICULOS IN LOJA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/loja/1/veiculos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"loja",
+								"1",
+								"veiculos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOJA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"HONDA - LOJA\",\r\n    \"veiculosComercializados\": []\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/loja",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"loja"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET VEICULOS IN LOJAS BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/loja/1/veiculos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"loja",
+								"1",
+								"veiculos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/loja",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"loja"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/loja/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"loja",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fabricante - Valid",
+			"item": [
+				{
+					"name": "POST FABRICANTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Honda Industry\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/fabricantes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"fabricantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRICANTE - GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/fabricantes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"fabricantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/fabricantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"fabricantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Acessorio - Valid",
+			"item": [
+				{
+					"name": "POST ACESSORIO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"freio brembo\",\r\n    \"preco\": 2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/acessorio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"acessorio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACESSORIO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/acessorio/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"acessorio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tipo Veiculo - Valid",
+			"item": [
+				{
+					"name": "TIPO-VEICULO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TOP-SPEED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/tipo-veiculo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"tipo-veiculo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TIPO_VEICULO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/tipo-veiculo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"tipo-veiculo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Caracteristica - VALID",
+			"item": [
+				{
+					"name": "POST CARACTERISTICA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Rapida\",\r\n    \"descricao\": \"Muito Rapida\",\r\n    \"veiculo\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
