@@ -1,9 +1,14 @@
 package br.com.fiap.motos.resource;
 
 import br.com.fiap.motos.entity.Loja;
+import br.com.fiap.motos.entity.Veiculo;
 import br.com.fiap.motos.service.LojaService;
+
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +21,12 @@ public class LojaResource implements ResourceDTO<Loja, Loja, Loja> {
     private LojaService lojaService;
 
     @GetMapping
-    public ResponseEntity<Loja> findLojaByExample(Example<Loja> example) {
-        return ResponseEntity.ok().body((Loja) lojaService.findAll(example));
+    public ResponseEntity<Collection<Loja>> findLojaByExample(@RequestParam(required = false) String nome) {
+        Loja exampleLoja = Loja.builder().nome(nome).build();
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
+        Example<Loja> example = Example.of(exampleLoja, matcher);
+        Collection<Loja> lojas = lojaService.findAll(example);
+        return ResponseEntity.ok().body(lojas);
     }
 
     @PostMapping
@@ -36,17 +45,18 @@ public class LojaResource implements ResourceDTO<Loja, Loja, Loja> {
         if (loja == null) {
             return ResponseEntity.notFound().build();
         }
+        loja.getVeiculosComercializados().size();
         return ResponseEntity.ok().body(loja);
     }
 
     @PostMapping("/{id}/veiculos")
-    public ResponseEntity<Loja> saveVeiculoForLoja(@PathVariable Long id, @RequestBody Loja loja) {
+    public ResponseEntity<Loja> saveVeiculoForLoja(@PathVariable Long id, @RequestBody Veiculo veiculo) {
         Loja foundLoja = lojaService.findById(id);
         if (foundLoja == null) {
             return ResponseEntity.notFound().build();
         }
-        foundLoja.setVeiculosComercializados(loja.getVeiculosComercializados());
-        lojaService.save(foundLoja);
-        return ResponseEntity.status(HttpStatus.CREATED).body(foundLoja);
+        foundLoja.getVeiculosComercializados().add(veiculo);
+        Loja savedLoja = lojaService.save(foundLoja);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedLoja);
     }
 }

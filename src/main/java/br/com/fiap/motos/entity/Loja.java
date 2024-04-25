@@ -26,7 +26,7 @@ public class Loja {
     @Column(name = "NOME_LOJA")
     private String nome;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "TB_LOJA_VEICULO", joinColumns = @JoinColumn(name = "ID_LOJA"), inverseJoinColumns = @JoinColumn(name = "VEICULO_ID"))
     @Builder.Default
     private Set<Veiculo> veiculosComercializados = new LinkedHashSet<>();

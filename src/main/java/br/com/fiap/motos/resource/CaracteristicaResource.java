@@ -2,8 +2,13 @@ package br.com.fiap.motos.resource;
 
 import br.com.fiap.motos.entity.Caracteristica;
 import br.com.fiap.motos.service.CaracteristicaService;
+
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +21,18 @@ public class CaracteristicaResource implements ResourceDTO<Caracteristica, Carac
     private CaracteristicaService caracteristicaService;
 
     @GetMapping
-    public ResponseEntity<Caracteristica> findCaracteristicaByExample(Example<Caracteristica> example) {
-        return ResponseEntity.ok().body((Caracteristica) caracteristicaService.findAll(example));
+    public ResponseEntity<Collection<Caracteristica>> findCaracteristicaByExample(
+            @RequestParam(required = false) String nome) {
+        Caracteristica exampleCaracteristica = new Caracteristica();
+        exampleCaracteristica.setNome(nome);
+
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues()
+                .withStringMatcher(StringMatcher.CONTAINING);
+
+        Example<Caracteristica> example = Example.of(exampleCaracteristica, matcher);
+
+        Collection<Caracteristica> caracteristicas = caracteristicaService.findAll(example);
+        return ResponseEntity.ok().body(caracteristicas);
     }
 
     @PostMapping

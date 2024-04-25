@@ -11,6 +11,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -65,7 +66,7 @@ public class Veiculo {
     @JoinColumn(name = "TIPO_VEICULO_ID", foreignKey = @ForeignKey(name = "FK_VEICULO_TIPO_VEICULO"))
     private TipoVeiculo tipo;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "TB_VEICULO_ACESSORIO", joinColumns = @JoinColumn(name = "VEICULO_ID"), inverseJoinColumns = @JoinColumn(name = "ACESSORIO_ID"))
     @Builder.Default
     private Set<Acessorio> acessorios = new LinkedHashSet<>();

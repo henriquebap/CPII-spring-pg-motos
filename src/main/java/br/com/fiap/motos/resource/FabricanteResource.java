@@ -2,8 +2,13 @@ package br.com.fiap.motos.resource;
 
 import br.com.fiap.motos.entity.Fabricante;
 import br.com.fiap.motos.service.FabricanteService;
+
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +21,17 @@ public class FabricanteResource implements ResourceDTO<Fabricante, Fabricante, F
     private FabricanteService fabricanteService;
 
     @GetMapping
-    public ResponseEntity<Fabricante> findFabricanteByExample(Example<Fabricante> example) {
-        return ResponseEntity.ok().body((Fabricante) fabricanteService.findAll(example));
+    public ResponseEntity<Collection<Fabricante>> findFabricanteByExample(@RequestParam(required = false) String nome) {
+        Fabricante exampleFabricante = new Fabricante();
+        exampleFabricante.setNome(nome);
+
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues()
+                .withStringMatcher(StringMatcher.CONTAINING);
+
+        Example<Fabricante> example = Example.of(exampleFabricante, matcher);
+
+        Collection<Fabricante> fabricantes = fabricanteService.findAll(example);
+        return ResponseEntity.ok().body(fabricantes);
     }
 
     @PostMapping
